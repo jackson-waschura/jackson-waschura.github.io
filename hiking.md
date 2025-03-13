@@ -113,14 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-## Hiking Log
-
 This page displays a collection of trails I've hiked throughout the San Francisco Bay Area. Hover over a trail on the map to see details, and click to view more information about each hike.
 
-In the future, I plan to expand this map with more hikes and additional features:
-- Photos from each hike
-- Filtering by difficulty, length, and region
-- Seasonal recommendations
-- Links to trail resources
-
-Stay tuned as I add more hikes and improve this visualization!
+In the future, I plan to expand this map with more hikes and photos! Stay tuned!
