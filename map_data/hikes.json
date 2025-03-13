@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Mount Tamalpais East Peak",
+    "path": [
+      [37.9268, -122.5977],
+      [37.9230, -122.5949],
+      [37.9197, -122.5931], 
+      [37.9162, -122.5866],
+      [37.9131, -122.5803]
+    ],
+    "distance": "5.3 miles",
+    "elevation": "1,300 ft",
+    "difficulty": "Moderate",
+    "notes": "Beautiful views of the Bay Area. Foggy in the morning but cleared up by midday."
+  },
+  {
+    "name": "Muir Woods Loop",
+    "path": [
+      [37.8989, -122.5785],
+      [37.8967, -122.5741],
+      [37.8942, -122.5723],
+      [37.8921, -122.5753],
+      [37.8912, -122.5793],
+      [37.8929, -122.5812],
+      [37.8953, -122.5823],
+      [37.8989, -122.5785]
+    ],
+    "distance": "3.7 miles",
+    "elevation": "580 ft",
+    "difficulty": "Easy",
+    "notes": "Gorgeous redwoods and a serene environment. Go early to avoid crowds."
+  },
+  {
+    "name": "Mission Peak",
+    "path": [
+      [37.5079, -121.9086],
+      [37.5103, -121.9042],
+      [37.5142, -121.8998],
+      [37.5167, -121.8956],
+      [37.5197, -121.8901],
+      [37.5229, -121.8864]
+    ],
+    "distance": "6.2 miles",
+    "elevation": "2,100 ft",
+    "difficulty": "Hard",
+    "notes": "Steep climb but worth it for the summit views. Bring plenty of water."
+  }
+] 
