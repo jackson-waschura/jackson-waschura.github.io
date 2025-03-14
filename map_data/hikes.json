@@ -49,5 +49,43 @@
     "elevation": "2,100 ft",
     "difficulty": "Hard",
     "notes": "Beautiful views of the Bay Area. Very exposed. Bring plenty of water and use sunscreen."
+  },
+  {
+    "name": "Purisima Creek North Ridge Trail",
+    "path": [
+      [37.449974, -122.338643],
+      [37.449196, -122.341457],
+      [37.449174, -122.343668],
+      [37.447948, -122.345234],
+      [37.449719, -122.347203],
+      [37.449824, -122.350897],
+      [37.447733, -122.351221],
+      [37.448385, -122.351650],
+      [37.446103, -122.359844],
+      [37.446942, -122.363374],
+      [37.442940, -122.369009]
+    ],
+    "distance": "4 miles",
+    "elevation": "1,200 ft",
+    "difficulty": "Moderate",
+    "notes": "Lots of ups and downs, nicely shaded for most of the hike. No grand view at the end, but many pleasant views along the way."
+  },
+  {
+    "name": "The Stanford Dish Loop",
+    "path": [
+      [37.410125, -122.161231],
+      [37.409785, -122.164792],
+      [37.411651, -122.165847],
+      [37.416890, -122.176217],
+      [37.414396, -122.183896],
+      [37.402819, -122.170876],
+      [37.405160, -122.164193],
+      [37.408127, -122.165613],
+      [37.409822, -122.164742]
+    ],
+    "distance": "3.7 miles",
+    "elevation": "500 ft",
+    "difficulty": "Easy",
+    "notes": "My go-to for a nice walk with friends. Paved path the whole way. Parking fills up quickly in the morning."
   }
 ] 

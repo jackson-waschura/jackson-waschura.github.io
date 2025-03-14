@@ -64,9 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Convert path to Leaflet LatLng objects
         const path = trail.path.map(point => L.latLng(point[0], point[1]));
         
-        // Create a random color for each trail
-        const colors = ['#FF5733', '#33A8FF', '#8C33FF', '#33FF57', '#FF33A8'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
+        // Use a pleasant gold for the trails
+        const color = '#FFD700';
         
         // Create a polyline for the trail
         const polyline = L.polyline(path, {
