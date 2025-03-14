@@ -37,7 +37,7 @@ permalink: /hiking/
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize the map centered on the SF Bay Area
-  const map = L.map('map').setView([37.7749, -122.4194], 9);
+  const map = L.map('map').setView([37.7013197, -122.217696], 9);
   
   // Add ESRI Terrain tile layer (focused on terrain and elevation)
   const terrainLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
