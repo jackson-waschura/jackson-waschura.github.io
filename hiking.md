@@ -113,6 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-This page displays a collection of trails I've hiked throughout the San Francisco Bay Area. Hover over a trail on the map to see details, and click to view more information about each hike.
+This page displays a collection of trails I've hiked throughout the San Francisco Bay Area. Click on a trail on the map to see details.
 
 In the future, I plan to expand this map with more hikes and photos! Stay tuned!
