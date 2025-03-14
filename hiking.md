@@ -28,6 +28,10 @@ permalink: /hiking/
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+/* Style for terrain tiles to make trails stand out */
+.leaflet-tile-pane img {
+  filter: brightness(0.9) saturate(0.8) hue-rotate(10deg);
+}
 </style>
 
 <script>
@@ -70,8 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create a polyline for the trail
         const polyline = L.polyline(path, {
           color: color,
-          weight: 5,
-          opacity: 0.8
+          weight: 4,
+          opacity: 1.0
         }).addTo(map);
         
         // Create popup content
@@ -91,15 +95,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add hover effect
         polyline.on('mouseover', function() {
           this.setStyle({
-            weight: 8,
-            opacity: 1
+            weight: 8
           });
         });
         
         polyline.on('mouseout', function() {
           this.setStyle({
-            weight: 5,
-            opacity: 0.8
+            weight: 4
           });
         });
       });
