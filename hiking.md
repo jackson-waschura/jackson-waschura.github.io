@@ -30,7 +30,7 @@ permalink: /hiking/
 }
 /* Style for terrain tiles to make trails stand out */
 .leaflet-tile-pane img {
-  filter: brightness(0.75) contrast(1.1) sepia(0.7) saturate(0.8);
+  filter: brightness(0.5) contrast(1.3) sepia(0.35) saturate(2.5) hue-rotate(90deg);
 }
 </style>
 
