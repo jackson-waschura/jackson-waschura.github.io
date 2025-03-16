@@ -39,3 +39,4 @@ exclude:
   - vendor/ruby/
   - map_data/README.md
   - README.md
+  - unplublished/
