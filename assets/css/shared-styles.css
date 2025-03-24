@@ -1,7 +1,7 @@
 :root {
-  --card-bg-color: #4e5b64;
+  --card-bg-color: #2d3c45;
   --title-color: #f9ae45;
-  --author-color: #8b712f;
+  --author-color: #c29522;
   --description-color: #e4e4e4;
   --card-padding: 20px;
   --card-border-radius: 8px;
@@ -17,17 +17,22 @@
   margin-bottom: var(--card-margin-bottom);
 }
 
+.book-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--element-margin-bottom);
+}
+
 .book-title {
   color: var(--title-color);
   font-size: 1.2em;
   font-weight: bold;
-  margin-bottom: var(--element-margin-bottom);
 }
 
 .book-author {
   color: var(--author-color);
   font-style: italic;
-  margin-bottom: var(--element-margin-bottom);
 }
 
 .book-description {

@@ -32,8 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
         bookCard.className = 'book-card';
         
         bookCard.innerHTML = `
-          <div class="book-title">${book.title}</div>
-          <div class="book-author">by ${book.author}</div>
+          <div class="book-header">
+            <div class="book-title">${book.title}</div>
+            <div class="book-author">by ${book.author}</div>
+          </div>
           <div class="book-description">${book.description}</div>
         `;
         
