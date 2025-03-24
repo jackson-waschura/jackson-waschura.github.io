@@ -14,6 +14,10 @@ By Scott Young, 2019
 
 By Scott Young, 2024
 
+- Chunking, working memory, and the brain's bottleneck
+- Expert intuition is memory
+- Experts don't make great teachers because of (1) implicit knowledge and (2) pedagogy != epistemology
+
 ## Atomic Habits
 
 [Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones](https://www.amazon.com/Atomic-Habits-Proven-Build-Break/dp/0735211299)
