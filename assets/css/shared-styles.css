@@ -22,17 +22,20 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: var(--element-margin-bottom);
+  align-items: baseline;
 }
 
 .book-title {
   color: var(--title-color);
   font-size: 1.2em;
   font-weight: bold;
+  line-height: 1.2;
 }
 
 .book-author {
   color: var(--author-color);
   font-style: italic;
+  line-height: 1.2;
 }
 
 .book-description {
