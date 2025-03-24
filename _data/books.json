@@ -1,0 +1,24 @@
+{
+  "books": [
+    {
+      "title": "Get Better at Anything",
+      "author": "Scott Young",
+      "description": "A second take on how learning works, this time with a focus on practical advice and general principles for getting better at anything."
+    },
+    {
+      "title": "The Tyranny of Merit",
+      "author": "Michael Sandel",
+      "description": "A critique of the focus on meritocracy in modern society claiming that even if we achieve perfect meritocracy, it will not lead to a more just or happy society."
+    },
+    {
+      "title": "Death Comes to Pemberley",
+      "author": "PD James",
+      "description": "A murder mystery set in the world of Jane Austen's Pride and Prejudice."
+    },
+    {
+      "title": "Ultralearning",
+      "author": "Scott Young",
+      "description": "Scott Young's synthesis of the most effective principles of accelerated learning focusing on people achieving rapid improvement through specific projects."
+    }
+  ]
+} 

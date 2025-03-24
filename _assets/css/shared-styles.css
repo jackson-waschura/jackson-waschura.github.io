@@ -1,0 +1,35 @@
+:root {
+  --card-bg-color: #4e5b64;
+  --title-color: #f9ae45;
+  --author-color: #8b712f;
+  --description-color: #e4e4e4;
+  --card-padding: 20px;
+  --card-border-radius: 8px;
+  --card-margin-bottom: 20px;
+  --element-margin-bottom: 10px;
+  --trail-color: #f9ae45;
+}
+
+.book-card {
+  background-color: var(--card-bg-color);
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  margin-bottom: var(--card-margin-bottom);
+}
+
+.book-title {
+  color: var(--title-color);
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: var(--element-margin-bottom);
+}
+
+.book-author {
+  color: var(--author-color);
+  font-style: italic;
+  margin-bottom: var(--element-margin-bottom);
+}
+
+.book-description {
+  color: var(--description-color);
+} 

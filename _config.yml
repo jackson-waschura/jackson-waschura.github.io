@@ -37,6 +37,5 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
-  - map_data/README.md
   - README.md
   - unpublished/

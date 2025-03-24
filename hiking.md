@@ -4,6 +4,8 @@ title: Hiking
 permalink: /hiking/
 ---
 
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/shared-styles.css">
+
 <div id="map" style="height: 600px; width: 100%;"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -52,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('map').appendChild(loadingIndicator);
   
   // Load hiking data from JSON file
-  fetch('{{ site.baseurl }}/map_data/hikes.json')
+  fetch('{{ site.baseurl }}/data/hikes.json')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok: ' + response.statusText);
@@ -63,17 +65,17 @@ document.addEventListener('DOMContentLoaded', function() {
       // Remove loading indicator
       loadingIndicator.remove();
       
+      // Get the trail color from CSS variables
+      const trailColor = getComputedStyle(document.documentElement).getPropertyValue('--trail-color').trim();
+      
       // Add the hiking trails to the map
       hikingTrails.forEach(trail => {
         // Convert path to Leaflet LatLng objects
         const path = trail.path.map(point => L.latLng(point[0], point[1]));
         
-        // Use a pleasant gold for the trails
-        const color = '#FFD700';
-        
         // Create a polyline for the trail
         const polyline = L.polyline(path, {
-          color: color,
+          color: trailColor,
           weight: 4,
           opacity: 1.0
         }).addTo(map);
