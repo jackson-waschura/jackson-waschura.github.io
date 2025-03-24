@@ -4,7 +4,7 @@ title: Reading
 permalink: /reading/
 ---
 
-<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/shared-styles.css">
+<link rel="stylesheet" href="/assets/css/shared-styles.css">
 
 <div id="reading-list">
   <div class="loading-indicator">Loading books...</div>
