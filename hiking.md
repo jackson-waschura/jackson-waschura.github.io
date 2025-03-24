@@ -4,7 +4,7 @@ title: Hiking
 permalink: /hiking/
 ---
 
-<link rel="stylesheet" href="/assets/css/shared-styles.css">
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/shared-styles.css">
 
 <div id="map" style="height: 600px; width: 100%;"></div>
 
