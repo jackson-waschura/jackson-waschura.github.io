@@ -4,6 +4,8 @@ title: Reading
 permalink: /reading/
 ---
 
+What have I been reading? Below is a reverse chronological list of books I've read since the start of 2025.
+
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/shared-styles.css">
 
 <div id="reading-list">
