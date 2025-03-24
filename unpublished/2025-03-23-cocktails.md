@@ -14,4 +14,4 @@ A living document of fun cocktails.
 - 1 egg white
 - root beer
 
-Reverse Mime shake all ingredients (first with ice then without) and strain into collins glass with ice. Top with root beer.
+Reverse Mime shake all ingredients (first with ice then no ice and add egg white) and strain into collins glass with ice. Top with root beer.
