@@ -248,5 +248,43 @@
     "elevation": "950 ft",
     "difficulty": "Easy",
     "notes": "A pleasant walk with a nice variety of terrain and flora. Not maintained very well at times, so watch out for tall grass and ticks. Great for a Sunday with a pit-stop at Alpine Inn for lunch!"
+  },
+  {
+    "name": "Little Yosemite and Indian Joe Creek Loop",
+    "path": [
+      [37.509898, -121.828661],
+      [37.508288, -121.828733],
+      [37.508886, -121.824468],
+      [37.510353, -121.824388],
+      [37.510038, -121.821130],
+      [37.513158, -121.825149],
+      [37.515397, -121.824471],
+      [37.517634, -121.824010],
+      [37.519740, -121.822394],
+      [37.524281, -121.818163],
+      [37.526358, -121.815993],
+      [37.523119, -121.808872],
+      [37.518674, -121.810027],
+      [37.517171, -121.810892],
+      [37.516060, -121.812081],
+      [37.514616, -121.808693],
+      [37.511679, -121.810556],
+      [37.510473, -121.810801],
+      [37.511045, -121.809337],
+      [37.509571, -121.809043],
+      [37.508421, -121.810467],
+      [37.507980, -121.813252],
+      [37.508583, -121.813805],
+      [37.507566, -121.814591],
+      [37.506772, -121.813500],
+      [37.505630, -121.814734],
+      [37.504018, -121.821708],
+      [37.506130, -121.828505],
+      [37.509898, -121.828661]
+    ],
+    "distance": "6 miles",
+    "elevation": "1600 ft",
+    "difficulty": "Moderate",
+    "notes": "A beautiful hike with views of rolling hills and many creeks. A little exposed at parts, so sunscreen up."
   }
 ] 
