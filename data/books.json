@@ -1,6 +1,11 @@
 {
   "books": [
     {
+      "title": "Bloodchild and Other Stories",
+      "author": "Octavia E. Butler",
+      "description": "A collection of short stories by Octavia E. Butler, also including two essays."
+    },
+    {
       "title": "Get Better at Anything",
       "author": "Scott Young",
       "description": "A second take on how learning works, this time with a focus on practical advice and general principles for getting better at anything."
