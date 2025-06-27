@@ -1,6 +1,11 @@
 {
   "books": [
     {
+        "title": "To Say Nothing of the Dog",
+        "author": "Connie Willis",
+        "description": "A time traveling romp with mystery, romance, and a hefty dose of irreverence."
+    },
+    {
       "title": "Bloodchild and Other Stories",
       "author": "Octavia E. Butler",
       "description": "A collection of short stories by Octavia E. Butler, also including two essays."
