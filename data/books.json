@@ -1,6 +1,16 @@
 {
   "books": [
     {
+        "title": "Waking Up",
+        "author": "Sam Harris",
+        "description": "A bit of a meandering exploration of the nature of consciousness and spiritual experience."
+    },
+    {
+        "title": "The Overstory",
+        "author": "Richard Powers",
+        "description": "A novel which weaves the personal stories of several unique characters to tell the story of the fight to save the world's trees."
+    },
+    {
         "title": "To Say Nothing of the Dog",
         "author": "Connie Willis",
         "description": "A time traveling romp with mystery, romance, and a hefty dose of irreverence."
