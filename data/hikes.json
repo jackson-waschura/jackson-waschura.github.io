@@ -366,5 +366,37 @@
     "elevation": "1100 ft",
     "difficulty": "Moderate",
     "notes": "A fun hike through towering redwoods. The trail is well-maintained, shady, and a little steep and dusty at times."
+  },
+  {
+    "name": "Alambique Trail to Alice's Restaurant",
+    "path": [
+      [37.410578, -122.261228],
+      [37.409149, -122.259919],
+      [37.407104, -122.261282],
+      [37.406337, -122.258857],
+      [37.404488, -122.259007],
+      [37.403687, -122.260284],
+      [37.402919, -122.260455],
+      [37.401539, -122.263341],
+      [37.398266, -122.263513],
+      [37.398172, -122.268513],
+      [37.399374, -122.269564],
+      [37.398777, -122.270144],
+      [37.398956, -122.271828],
+      [37.398496, -122.272837],
+      [37.399689, -122.272590],
+      [37.399536, -122.273008],
+      [37.400542, -122.273040],
+      [37.399647, -122.273577],
+      [37.400311, -122.276946],
+      [37.397004, -122.274736],
+      [37.396663, -122.275547],
+      [37.393248, -122.271687],
+      [37.387005, -122.265069]
+    ],
+    "distance": "7.7 miles",
+    "elevation": "1200 ft",
+    "difficulty": "Moderate",
+    "notes": "A beautiful hike through shaded forest passing by a series of photo-worthy trees and vistas. Alice's Restaurant is also an absolute gem!"
   }
 ] 
