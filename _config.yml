@@ -20,6 +20,14 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://jackson-waschura.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  jackson-waschura
 
+# Explicit nav page list so minima doesn't auto-include every page with a
+# title (e.g. hike-editor.md, which should only be reachable by direct URL).
+header_pages:
+  - about.md
+  - hiking.md
+  - reading.md
+  - questions.md
+
 # Build settings
 markdown: kramdown
 theme: minima

@@ -8,6 +8,9 @@
   --card-margin-bottom: 20px;
   --element-margin-bottom: 10px;
   --trail-color: #f9ae45;
+  --color-dark: #1f2a30;
+  --color-border: #55636c;
+  --color-muted: #9aa7ad;
 }
 
 .book-card {
