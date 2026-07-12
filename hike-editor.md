@@ -4,16 +4,25 @@ title: Hike Editor
 permalink: /hike-editor/
 ---
 
-<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/shared-styles.css">
-
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <style>
+/* This page is a wider workbench than the site's usual prose column
+   (.leaf tops out at 50rem, too narrow for a map + sidebar), so it
+   gets its own wrapper — same padding rhythm as .leaf, just roomier.
+   Tile retinting for #map is already handled globally by site.css's
+   .leaflet-tile-pane img rule, so it isn't repeated here. */
+.editor-wrap {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 3.2rem 1.4rem 3.6rem;
+}
+
 .editor-layout {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 1.5rem;
   align-items: flex-start;
 }
 
@@ -21,38 +30,49 @@ permalink: /hike-editor/
   flex: 3 1 480px;
   min-height: 70vh;
   height: 70vh;
-  border-radius: var(--card-border-radius);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
 }
 
 .editor-sidebar {
   flex: 1 1 320px;
   min-width: 280px;
   max-width: 420px;
-  background-color: var(--card-bg-color);
-  padding: var(--card-padding);
-  border-radius: var(--card-border-radius);
-  color: var(--description-color);
+  background-color: var(--paper-tint);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1.5rem 1.6rem;
+  color: var(--ink-soft);
 }
 
 .editor-sidebar h3 {
-  color: var(--title-color);
+  color: var(--ink);
   margin-top: 0;
-  margin-bottom: 8px;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--rule);
 }
 
 .editor-section {
-  margin-bottom: var(--card-margin-bottom);
+  margin-bottom: 1.5rem;
+}
+
+.editor-section:last-child {
+  margin-bottom: 0;
 }
 
 .editor-field {
-  margin-bottom: 10px;
+  margin-bottom: 0.75rem;
 }
 
 .editor-field label {
   display: block;
-  font-weight: bold;
-  margin-bottom: 4px;
-  color: var(--description-color);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
 }
 
 .editor-field input[type="text"],
@@ -60,11 +80,11 @@ permalink: /hike-editor/
 .editor-field textarea {
   width: 100%;
   box-sizing: border-box;
-  padding: 6px 8px;
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-dark);
-  color: var(--description-color);
+  padding: 0.4rem 0.55rem;
+  border-radius: 2px;
+  border: 1px solid var(--rule);
+  background-color: var(--paper);
+  color: var(--ink);
   font-family: inherit;
   font-size: 0.95em;
 }
@@ -73,9 +93,13 @@ permalink: /hike-editor/
   resize: vertical;
 }
 
+.editor-sidebar input[type="radio"] {
+  accent-color: var(--green);
+}
+
 .field-with-computed {
   display: flex;
-  gap: 6px;
+  gap: 0.45rem;
   align-items: center;
 }
 
@@ -86,108 +110,133 @@ permalink: /hike-editor/
 .reset-btn {
   flex: 0 0 auto;
   cursor: pointer;
-  background-color: var(--color-dark);
-  color: var(--description-color);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  padding: 6px 9px;
+  background-color: var(--paper);
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.4rem 0.6rem;
+  font-family: inherit;
   font-size: 0.95em;
   line-height: 1;
 }
 
+.reset-btn:hover {
+  color: var(--green);
+  border-color: var(--green);
+}
+
 .computed-label {
   font-size: 0.8em;
-  color: var(--color-muted);
-  margin-top: 3px;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin-top: 0.25rem;
 }
 
 .path-type-options {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 0.7rem;
 }
 
 .path-type-options label {
   font-weight: normal;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.35rem;
+  color: var(--ink);
 }
 
 .editor-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 0.55rem;
+  margin-bottom: 0.55rem;
 }
 
 .editor-buttons.follow-up-buttons {
-  margin-top: 6px;
+  margin-top: 0.45rem;
 }
 
 .editor-actions {
-  margin-top: 8px;
+  margin-top: 0.55rem;
 }
 
 .editor-buttons button,
 .editor-actions button {
   cursor: pointer;
-  background-color: var(--trail-color);
-  color: var(--color-dark);
-  border: none;
-  border-radius: 4px;
-  padding: 8px 12px;
-  font-weight: bold;
+  background-color: var(--green);
+  color: var(--paper);
+  border: 1px solid var(--green);
+  border-radius: 2px;
+  padding: 0.5rem 0.8rem;
+  font-family: inherit;
+  font-weight: 600;
   font-size: 0.9em;
+}
+
+.editor-buttons button:hover:not(:disabled),
+.editor-actions button:hover:not(:disabled) {
+  background-color: var(--ink);
+  border-color: var(--ink);
 }
 
 .editor-buttons button:disabled,
 .editor-actions button:disabled {
-  background-color: var(--color-border);
-  color: var(--color-muted);
+  background-color: var(--paper-tint);
+  color: var(--ink-soft);
+  border-color: var(--rule);
   cursor: not-allowed;
 }
 
 .secondary-btn {
-  background-color: var(--color-border) !important;
-  color: var(--description-color) !important;
+  background-color: var(--paper) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--rule) !important;
+}
+
+.secondary-btn:hover:not(:disabled) {
+  color: var(--green) !important;
+  border-color: var(--green) !important;
 }
 
 .hint-text {
   font-size: 0.8em;
-  color: var(--color-muted);
-  margin-top: 4px;
+  color: var(--ink-soft);
+  margin-top: 0.35rem;
 }
 
 .error-text {
+  /* Semantic error accent — a muted rust kept in the parchment's warm
+     family rather than a clashing stock red. */
   font-size: 0.8em;
-  color: #e08787;
-  margin-top: 4px;
+  color: #8C2F1F;
+  margin-top: 0.35rem;
 }
 
 .copied-flash {
-  color: #8fe08f;
-  font-weight: bold;
+  color: var(--green);
+  font-weight: 600;
 }
 
 #json-preview {
   width: 100%;
   box-sizing: border-box;
   min-height: 220px;
-  background-color: var(--color-dark);
-  color: var(--description-color);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  padding: 8px;
+  background-color: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.6rem;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 0.8em;
   white-space: pre;
 }
 
 .usage-hint {
-  margin-top: 16px;
+  margin-top: 1.2rem;
   font-size: 0.9em;
-  color: var(--description-color);
+  font-style: italic;
+  color: var(--ink-soft);
 }
 
 .trail-pin-icon {
@@ -195,97 +244,107 @@ permalink: /hike-editor/
   height: 14px;
   border-radius: 50%;
   background-color: var(--trail-color);
-  border: 2px solid white;
-  box-shadow: 0 0 2px rgba(0,0,0,0.6);
+  border: 2px solid var(--paper);
 }
 
 .stat-count {
   font-size: 0.85em;
-  color: var(--color-muted);
-  margin-top: 4px;
+  color: var(--ink-soft);
+  margin-top: 0.3rem;
+}
+
+@media (max-width: 640px) {
+  .editor-sidebar {
+    padding: 1.2rem 1.3rem;
+  }
 }
 </style>
 
-<div class="editor-layout">
-  <div id="map"></div>
+<div class="editor-wrap">
+  <h1 class="chapter-title sc">Hike Editor</h1>
+  <p class="dek">trace a route, then paste the record into data/hikes.json</p>
 
-  <div class="editor-sidebar">
-    <div class="editor-section">
-      <h3>Route</h3>
-      <div class="editor-buttons">
-        <button type="button" id="undo-pin-btn" class="secondary-btn">Undo last pin</button>
-        <button type="button" id="clear-pins-btn" class="secondary-btn">Clear all pins</button>
-      </div>
-      <div class="stat-count" id="pin-count">0 pins placed</div>
+  <div class="editor-layout">
+    <div id="map"></div>
 
-      <div class="editor-field">
-        <label for="path-type-select">Path type</label>
-        <div class="path-type-options">
-          <label><input type="radio" name="path-type" value="linear"> Linear</label>
-          <label><input type="radio" name="path-type" value="out-and-back"> Out-and-back</label>
-          <label><input type="radio" name="path-type" value="loop" checked> Loop</label>
+    <div class="editor-sidebar">
+      <div class="editor-section">
+        <h3 class="sc">Route</h3>
+        <div class="editor-buttons">
+          <button type="button" id="undo-pin-btn" class="secondary-btn">Undo last pin</button>
+          <button type="button" id="clear-pins-btn" class="secondary-btn">Clear all pins</button>
+        </div>
+        <div class="stat-count" id="pin-count">0 pins placed</div>
+
+        <div class="editor-field">
+          <label for="path-type-select">Path type</label>
+          <div class="path-type-options">
+            <label><input type="radio" name="path-type" value="linear"> Linear</label>
+            <label><input type="radio" name="path-type" value="out-and-back"> Out-and-back</label>
+            <label><input type="radio" name="path-type" value="loop" checked> Loop</label>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="editor-section">
-      <h3>Details</h3>
-      <div class="editor-field">
-        <label for="name-input">Name</label>
-        <input type="text" id="name-input" placeholder="e.g. Mount Tam Loop">
-      </div>
-
-      <div class="editor-field">
-        <label for="difficulty-select">Difficulty</label>
-        <select id="difficulty-select">
-          <!-- options populated below via JS from a hardcoded list; keep in sync with the difficulty values used in data/hikes.json -->
-        </select>
-      </div>
-
-      <div class="editor-field">
-        <label for="distance-input">Distance</label>
-        <div class="field-with-computed">
-          <input type="text" id="distance-input" placeholder="e.g. 3.8 miles">
-          <button type="button" class="reset-btn" id="distance-reset-btn" title="Reset to computed value">&#8634;</button>
+      <div class="editor-section">
+        <h3 class="sc">Details</h3>
+        <div class="editor-field">
+          <label for="name-input">Name</label>
+          <input type="text" id="name-input" placeholder="e.g. Mount Tam Loop">
         </div>
-        <div class="computed-label" id="distance-computed-label">computed: &ndash;</div>
-        <div class="error-text" id="distance-error" style="display: none;"></div>
-      </div>
 
-      <div class="editor-field">
-        <label for="elevation-input">Elevation Gain</label>
-        <div class="field-with-computed">
-          <input type="text" id="elevation-input" placeholder="e.g. 1,600 ft">
-          <button type="button" class="reset-btn" id="elevation-reset-btn" title="Reset to computed value">&#8634;</button>
+        <div class="editor-field">
+          <label for="difficulty-select">Difficulty</label>
+          <select id="difficulty-select">
+            <!-- options populated below via JS from a hardcoded list; keep in sync with the difficulty values used in data/hikes.json -->
+          </select>
         </div>
-        <div class="computed-label" id="elevation-computed-label">computed: &ndash;</div>
-        <div class="editor-buttons follow-up-buttons">
-          <button type="button" id="fetch-elevation-btn" class="secondary-btn">Fetch elevation</button>
+
+        <div class="editor-field">
+          <label for="distance-input">Distance</label>
+          <div class="field-with-computed">
+            <input type="text" id="distance-input" placeholder="e.g. 3.8 miles">
+            <button type="button" class="reset-btn" id="distance-reset-btn" title="Reset to computed value">&#8634;</button>
+          </div>
+          <div class="computed-label" id="distance-computed-label">computed: &ndash;</div>
+          <div class="error-text" id="distance-error" style="display: none;"></div>
         </div>
-        <div class="error-text" id="elevation-error" style="display: none;"></div>
+
+        <div class="editor-field">
+          <label for="elevation-input">Elevation Gain</label>
+          <div class="field-with-computed">
+            <input type="text" id="elevation-input" placeholder="e.g. 1,600 ft">
+            <button type="button" class="reset-btn" id="elevation-reset-btn" title="Reset to computed value">&#8634;</button>
+          </div>
+          <div class="computed-label" id="elevation-computed-label">computed: &ndash;</div>
+          <div class="editor-buttons follow-up-buttons">
+            <button type="button" id="fetch-elevation-btn" class="secondary-btn">Fetch elevation</button>
+          </div>
+          <div class="error-text" id="elevation-error" style="display: none;"></div>
+        </div>
+
+        <div class="editor-field">
+          <label for="notes-input">Notes</label>
+          <textarea id="notes-input" rows="4" placeholder="Notes about the hike..."></textarea>
+        </div>
       </div>
 
-      <div class="editor-field">
-        <label for="notes-input">Notes</label>
-        <textarea id="notes-input" rows="4" placeholder="Notes about the hike..."></textarea>
+      <div class="editor-section">
+        <h3 class="sc">JSON Preview</h3>
+        <textarea id="json-preview" readonly></textarea>
+        <div class="editor-actions">
+          <button type="button" id="copy-json-btn">Copy JSON to clipboard</button>
+          <button type="button" id="download-json-btn">Download JSON</button>
+        </div>
+        <div class="hint-text" id="export-hint">Add at least 2 pins to enable copy/download.</div>
+        <div class="hint-text">Paste this object into the array in <code>data/hikes.json</code> (remember a trailing comma if it's not the last entry), then commit.</div>
       </div>
-    </div>
-
-    <div class="editor-section">
-      <h3>JSON Preview</h3>
-      <textarea id="json-preview" readonly></textarea>
-      <div class="editor-actions">
-        <button type="button" id="copy-json-btn">Copy JSON to clipboard</button>
-        <button type="button" id="download-json-btn">Download JSON</button>
-      </div>
-      <div class="hint-text" id="export-hint">Add at least 2 pins to enable copy/download.</div>
-      <div class="hint-text">Paste this object into the array in <code>data/hikes.json</code> (remember a trailing comma if it's not the last entry), then commit.</div>
     </div>
   </div>
-</div>
 
-<div class="usage-hint">
-  <strong>Usage:</strong> Left-click drag to pan, scroll to zoom. Right-click empty map to add a pin, right-click a pin to remove it, left-click drag a pin to move it.
+  <p class="usage-hint">
+    <strong>Usage:</strong> Left-click drag to pan, scroll to zoom. Right-click empty map to add a pin, right-click a pin to remove it, left-click drag a pin to move it.
+  </p>
 </div>
 
 <script>
