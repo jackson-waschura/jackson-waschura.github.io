@@ -4,11 +4,9 @@ title: Hiking
 permalink: /hiking/
 ---
 
-<div class="leaf">
+<div class="hiking-head">
   <h1 class="chapter-title sc">Hiking</h1>
   <p class="dek">a field log of trails traced by hand</p>
-
-  <div id="map"></div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -28,18 +26,21 @@ permalink: /hiking/
 }
 </style>
 
-<div class="hike-list">
-  <p class="dek" style="margin-top: 2rem;">click a trail below to find it on the map</p>
-  <div id="hike-list-entries"></div>
+<div class="hiking-layout">
+  <div id="map"></div>
+  <div class="hike-list">
+    <p class="list-hint">click a trail to find it on the map</p>
+    <div id="hike-list-entries"></div>
+  </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const map = L.map('map').setView([37.7013197, -122.217696], 9);
 
-  const terrainLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
-    maxZoom: 13
+  const topoLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, NPS',
+    maxZoom: 18
   }).addTo(map);
 
   const loadingIndicator = document.createElement('div');

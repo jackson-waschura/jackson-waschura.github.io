@@ -149,9 +149,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* ============================================================
    PAGE SCAFFOLD
    ============================================================ */
+/* Sized to the text column itself (not the wider margin-note reach)
+   so the column is the thing that's centered on the page; margin
+   notes then break out into genuine outside-the-column whitespace
+   via their own negative margin, rather than sitting in a reserved
+   inner lane that skews the visible text off-center. */
 .leaf {
   position: relative;
-  max-width: 50rem;
+  max-width: calc(var(--col) + 2.8rem);
   margin: 0 auto;
   padding: 3.2rem 1.4rem 3.6rem;
 }
@@ -172,6 +177,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .prose { max-width: var(--col); }
+/* Only when an intro paragraph is immediately followed by a list —
+   .prose used standalone (About bio, essay body) already gets its
+   spacing from the fleuron/section that follows it. */
+.prose + .book-index,
+.prose + .question-list { margin-top: 2.2rem; }
 .prose p {
   text-align: justify;
   -webkit-hyphens: auto;
@@ -224,7 +234,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .margin-note.gloss { font-style: italic; font-size: 0.88rem; line-height: 1.5; color: var(--green); }
 .margin-note .attrib { display: block; margin-top: 0.45rem; font-style: normal; font-size: 0.72rem; color: var(--ink-soft); }
 
-@media (max-width: 880px) {
+/* Threshold: leaf is now only col-width, centered, so a margin note
+   needs (margin-w + margin-gap) of clear space on the right specifically —
+   below this width there isn't room and it must collapse to inline. */
+@media (max-width: 1080px) {
   .margin-note {
     float: none;
     width: auto;
@@ -268,19 +281,39 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .mark--unread { color: var(--gold); }
 
 /* ============================================================
-   HIKING — field notes below the (retinted) map
+   HIKING — map + field-note list. Stacked (map, then list) below
+   the wide breakpoint; side-by-side with the map pinned and the
+   list scrolling in its own pane above it.
    ============================================================ */
+.hiking-head {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: 3.2rem 1.4rem 0;
+  text-align: center;
+}
+.hiking-layout {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: 1.6rem 1.4rem 3.6rem;
+}
+.list-hint { text-align: center; font-style: italic; color: var(--ink-soft); margin-bottom: 1.2rem; }
+
 #map {
   height: 560px;
   width: 100%;
   border-radius: 3px;
 }
 /* Retint tiles only — polylines/popups drawn in a separate Leaflet
-   pane and must stay unfiltered, or trail colors/popup ink shift too. */
+   pane and must stay unfiltered, or trail colors/popup ink shift too.
+   Kept deliberately light on sepia (the main hue-flattening culprit)
+   so World Topo Map's own blue water / green land survive the warm-up
+   instead of converging toward the same muddy brown as the gold trail
+   line. */
 .leaflet-tile-pane img {
-  filter: sepia(0.35) saturate(1.6) hue-rotate(-8deg) brightness(0.92) contrast(1.05);
+  filter: sepia(0.1) saturate(1.25) hue-rotate(-4deg) brightness(0.97) contrast(1.08);
 }
-.hike-list { max-width: var(--col); margin: 0 auto; padding: 0 1.4rem; }
+
+.hike-list { max-width: var(--col); margin: 1.6rem auto 0; padding: 0 1.4rem; }
 .field-note {
   max-width: var(--col);
   background: var(--paper-tint);
@@ -295,6 +328,40 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .trail-stats { font-size: 0.95rem; color: var(--green); margin-bottom: 0.7rem; }
 .trail-stats .sep { color: var(--ink-soft); margin: 0 0.35em; }
 .trail-note { font-style: italic; color: var(--ink); max-width: 30rem; }
+
+@media (min-width: 900px) {
+  /* More compact heading so nav + head + the map/list row fit within
+     one viewport with little to no outer scrolling — the map "stays
+     in view" because there's nothing above/below it left to scroll
+     past, not because it's pinned mid-scroll. (position: sticky was
+     tried first, but a CSS Grid row whose two columns claim the same
+     explicit height gives a sticky child zero slack to travel in —
+     it "sticks" for exactly one pixel of scroll and no more. Sizing
+     the row to the viewport directly sidesteps that entirely.) */
+  .hiking-head { padding: 1.2rem 1.4rem 0; }
+  .hiking-head .dek { margin-bottom: 0.4rem; }
+  .hiking-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 24rem;
+    align-items: stretch;
+    gap: 1.8rem;
+    padding: 0.8rem 1.4rem 1.2rem;
+    height: calc(100vh - 10.5rem);
+    min-height: 420px;
+  }
+  #map { height: 100%; }
+  .hike-list {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    max-height: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .field-note { max-width: none; }
+  .list-hint { text-align: left; }
+}
 
 /* #map prefix bumps specificity above leaflet.css's own same-class
    rules — leaflet.css loads after site.css in the page and would
@@ -313,9 +380,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* ============================================================
    QUESTIONS
    ============================================================ */
-.question-list { max-width: var(--col); padding-left: 1.35em; margin-bottom: 1.6rem; }
+.question-list { max-width: var(--col); padding-left: 1.6em; margin-bottom: 1.6rem; }
 .question-list li { margin-bottom: 0.85em; text-align: justify; hyphens: auto; }
-.question-list li::marker { color: var(--green); font-style: italic; }
+.question-list li::marker {
+  color: var(--green);
+  font-weight: 700;
+  font-size: 1.35em;
+  font-variant-numeric: oldstyle-nums;
+}
 .closing-note { max-width: var(--col); font-style: italic; color: var(--ink-soft); }
 
 /* ============================================================
