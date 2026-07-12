@@ -5,11 +5,10 @@ permalink: /hiking/
 ---
 
 <div class="hiking-head">
-  <h1 class="chapter-title sc">Hiking</h1>
-  <p class="dek">a field log of trails traced by hand</p>
+  {%- include page-header.html title="Hiking" dek="a field log of trails traced by hand" -%}
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <style>

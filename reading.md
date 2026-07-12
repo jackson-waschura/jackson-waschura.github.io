@@ -5,8 +5,7 @@ permalink: /reading/
 ---
 
 <div class="leaf">
-  <h1 class="chapter-title sc">Reading</h1>
-  <p class="dek">what&rsquo;s been read, and what&rsquo;s still on the shelf</p>
+  {%- include page-header.html title="Reading" dek="what&rsquo;s been read, and what&rsquo;s still on the shelf" -%}
 
   <div class="prose dropcap-host" id="reading-intro">
     <p>Titles drift on and off this shelf as I make my way through them. A small green tick in the margin marks the ones I&rsquo;ve finished; a note in gold marks the ones still waiting.</p>

@@ -19,13 +19,7 @@ permalink: /
     <p>I&rsquo;m currently looking to meet new people in the SF Bay Area passionate about machine learning and life-long learning. If you think we&rsquo;d have a stimulating conversation, or if you have recommendations for any of the hobbies I listed above, please reach out!</p>
   </div>
 
-  <div class="fleuron" aria-hidden="true">
-    <svg viewBox="0 0 100 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-      <path d="M50,13 C42,4 24,3 9,12 C22,10.5 36,10.8 50,13 Z"/>
-      <path d="M50,13 C58,4 76,3 91,12 C78,10.5 64,10.8 50,13 Z"/>
-      <path d="M50,9.4 L53.2,13 L50,16.6 L46.8,13 Z"/>
-    </svg>
-  </div>
+  {%- include fleuron.html -%}
 
   <h2 class="chapter-title sc">Writing</h2>
   <p class="dek">essays, filed as they&rsquo;re finished</p>

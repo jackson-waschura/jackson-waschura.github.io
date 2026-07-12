@@ -54,9 +54,7 @@
   --ink:          #241A10;
   --ink-soft:     #4A3826;
   --green:        #33523D;
-  --green-deep:   #1F3122;
   --gold:         #8C5209;
-  --gold-bright:  #F9AE45;
   --rule:         rgba(36,26,16,0.22);
   --trail-color:  #F9AE45;
   --col:          34rem;
@@ -359,7 +357,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     margin: 0;
     padding: 0;
     height: 100%;
-    max-height: none;
     overflow-y: auto;
     overscroll-behavior: contain;
   }
@@ -472,7 +469,6 @@ footer.site-footer a:focus-visible {
 @media (max-width: 640px) {
   body { font-size: 1.06rem; }
   .masthead .site-title { font-size: 2.05rem; }
-  .dropcap { font-size: 2.7rem; }
   .field-note { padding: 1.6rem 1.4rem; }
   .site-nav nav a { margin-left: 0.7rem; }
   #map { height: 420px; }

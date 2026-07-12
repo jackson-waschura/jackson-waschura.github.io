@@ -5,8 +5,7 @@ permalink: /questions/
 ---
 
 <div class="leaf">
-  <h1 class="chapter-title sc">Questions</h1>
-  <p class="dek">a running list of things I&rsquo;m curious about</p>
+  {%- include page-header.html title="Questions" dek="a running list of things I&rsquo;m curious about" -%}
 
   <div class="prose">
     <p>The following is a list of questions that I&rsquo;m curious about. If you believe you could share some insight about the answers, please let me know!</p>

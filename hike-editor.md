@@ -4,7 +4,7 @@ title: Hike Editor
 permalink: /hike-editor/
 ---
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <style>
@@ -188,15 +188,17 @@ permalink: /hike-editor/
   cursor: not-allowed;
 }
 
-.secondary-btn {
-  background-color: var(--paper) !important;
-  color: var(--ink) !important;
-  border: 1px solid var(--rule) !important;
+.editor-buttons .secondary-btn,
+.editor-actions .secondary-btn {
+  background-color: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--rule);
 }
 
-.secondary-btn:hover:not(:disabled) {
-  color: var(--green) !important;
-  border-color: var(--green) !important;
+.editor-buttons .secondary-btn:hover:not(:disabled),
+.editor-actions .secondary-btn:hover:not(:disabled) {
+  color: var(--green);
+  border-color: var(--green);
 }
 
 .hint-text {
@@ -261,8 +263,7 @@ permalink: /hike-editor/
 </style>
 
 <div class="editor-wrap">
-  <h1 class="chapter-title sc">Hike Editor</h1>
-  <p class="dek">trace a route, then paste the record into data/hikes.json</p>
+  {%- include page-header.html title="Hike Editor" dek="trace a route, then paste the record into data/hikes.json" -%}
 
   <div class="editor-layout">
     <div id="map"></div>
@@ -498,26 +499,16 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ---------------------------------------------------------------------
-  // Haversine distance
+  // Great-circle distance (via Leaflet's own LatLng distance calculation)
   // ---------------------------------------------------------------------
-  function haversineMiles(lat1, lon1, lat2, lon2) {
-    const R = 3958.8; // earth radius in miles
-    const toRad = deg => deg * Math.PI / 180;
-    const dLat = toRad(lat2 - lat1);
-    const dLon = toRad(lon2 - lon1);
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
-  }
+  const METERS_PER_MILE = 1609.344;
 
   function computeDistanceMiles(path) {
     let total = 0;
     for (let i = 1; i < path.length; i++) {
-      total += haversineMiles(path[i - 1][0], path[i - 1][1], path[i][0], path[i][1]);
+      total += L.latLng(path[i - 1][0], path[i - 1][1]).distanceTo(L.latLng(path[i][0], path[i][1]));
     }
-    return total;
+    return total / METERS_PER_MILE;
   }
 
   function formatDistance(miles) {
@@ -535,6 +526,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const elevationInput = document.getElementById('elevation-input');
   const distanceComputedLabel = document.getElementById('distance-computed-label');
   const elevationComputedLabel = document.getElementById('elevation-computed-label');
+  const nameInput = document.getElementById('name-input');
+  const difficultySelect = document.getElementById('difficulty-select');
+  const notesInput = document.getElementById('notes-input');
+  const undoPinBtn = document.getElementById('undo-pin-btn');
+  const clearPinsBtn = document.getElementById('clear-pins-btn');
 
   let lastAutoFilledDistance = null;
   let lastAutoFilledElevation = null;
@@ -705,12 +701,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function buildHikeObject() {
     return {
-      name: document.getElementById('name-input').value,
+      name: nameInput.value,
       path: computeExportPath(),
       distance: distanceInput.value,
       elevation: elevationInput.value,
-      difficulty: document.getElementById('difficulty-select').value,
-      notes: document.getElementById('notes-input').value
+      difficulty: difficultySelect.value,
+      notes: notesInput.value
     };
   }
 
@@ -746,8 +742,8 @@ document.addEventListener('DOMContentLoaded', function() {
     exportHint.style.display = enabled ? 'none' : 'block';
 
     const hasPins = pins.length > 0;
-    document.getElementById('undo-pin-btn').disabled = !hasPins;
-    document.getElementById('clear-pins-btn').disabled = !hasPins;
+    undoPinBtn.disabled = !hasPins;
+    clearPinsBtn.disabled = !hasPins;
   }
 
   function onPinsChanged() {
@@ -767,8 +763,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Metadata field changes update the JSON preview live.
-  ['name-input', 'difficulty-select', 'notes-input'].forEach(id => {
-    document.getElementById(id).addEventListener('input', updatePreview);
+  [nameInput, difficultySelect, notesInput].forEach(el => {
+    el.addEventListener('input', updatePreview);
   });
   distanceInput.addEventListener('input', updatePreview);
   elevationInput.addEventListener('input', updatePreview);
@@ -777,7 +773,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Difficulty options (hardcoded list; keep in sync with the values
   // actually used in data/hikes.json)
   // ---------------------------------------------------------------------
-  const difficultySelect = document.getElementById('difficulty-select');
   ['Easy', 'Moderate', 'Hard'].forEach(value => {
     const option = document.createElement('option');
     option.value = value;
@@ -788,14 +783,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // ---------------------------------------------------------------------
   // Undo / Clear
   // ---------------------------------------------------------------------
-  document.getElementById('undo-pin-btn').addEventListener('click', function() {
+  undoPinBtn.addEventListener('click', function() {
     if (pins.length === 0) return;
     const last = pins.pop();
     map.removeLayer(last.marker);
     onPinsChanged();
   });
 
-  document.getElementById('clear-pins-btn').addEventListener('click', function() {
+  clearPinsBtn.addEventListener('click', function() {
     if (pins.length === 0) return;
     if (!confirm('Clear all pins? This cannot be undone.')) return;
     pins.forEach(p => map.removeLayer(p.marker));
