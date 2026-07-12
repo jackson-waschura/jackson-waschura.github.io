@@ -6,8 +6,10 @@
       <path d="M50,9.4 L53.2,13 L50,16.6 L46.8,13 Z"/>
     </svg>
   </div>
-  <p class="sc">Jackson Waschura</p>
-  {%- if site.github_username -%}
-  <p class="footer-links"><a href="https://github.com/{{ site.github_username }}">GitHub</a></p>
-  {%- endif -%}
+  <p class="footer-line sc">
+    Jackson Waschura
+    {%- if site.github_username -%}
+    <span class="sep" aria-hidden="true">&middot;</span><a href="https://github.com/{{ site.github_username }}">GitHub</a>
+    {%- endif -%}
+  </p>
 </footer>
