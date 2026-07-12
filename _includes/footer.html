@@ -7,4 +7,7 @@
     </svg>
   </div>
   <p class="sc">Jackson Waschura</p>
+  {%- if site.github_username -%}
+  <p class="footer-links"><a href="https://github.com/{{ site.github_username }}">GitHub</a></p>
+  {%- endif -%}
 </footer>

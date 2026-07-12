@@ -1,40 +1,45 @@
 /* ============================================================
    FONTS — self-hosted (see assets/fonts/). EB Garamond for text,
-   Cinzel Decorative reserved for drop caps only.
+   Cinzel Decorative reserved for drop caps only. font-display:
+   optional (not swap) + preloading the two body weights in
+   default.html — swap paints the fallback serif first and then
+   resizes text once the real face loads, which reads as the page
+   "jumping" on every navigation; optional commits to one face
+   per page load and never swaps mid-render.
    ============================================================ */
 @font-face {
   font-family: 'EB Garamond';
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: optional;
   src: url('/assets/fonts/eb-garamond-400-normal.woff2') format('woff2');
 }
 @font-face {
   font-family: 'EB Garamond';
   font-style: italic;
   font-weight: 400;
-  font-display: swap;
+  font-display: optional;
   src: url('/assets/fonts/eb-garamond-400-italic.woff2') format('woff2');
 }
 @font-face {
   font-family: 'EB Garamond';
   font-style: normal;
   font-weight: 600;
-  font-display: swap;
+  font-display: optional;
   src: url('/assets/fonts/eb-garamond-600-normal.woff2') format('woff2');
 }
 @font-face {
   font-family: 'EB Garamond';
   font-style: italic;
   font-weight: 600;
-  font-display: swap;
+  font-display: optional;
   src: url('/assets/fonts/eb-garamond-600-italic.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Cinzel Decorative';
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
+  font-display: optional;
   src: url('/assets/fonts/cinzel-decorative-700-normal.woff2') format('woff2');
 }
 
@@ -195,7 +200,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
    MASTHEAD — homepage only
    ============================================================ */
 .masthead { text-align: center; padding-bottom: 1.2rem; }
-.masthead .kicker { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 0.7rem; }
 .masthead .site-title { font-size: 2.55rem; font-weight: 600; letter-spacing: 0.01em; margin-bottom: 0.55rem; }
 .masthead .site-tagline { font-style: italic; color: var(--ink-soft); font-size: 1.02rem; margin-bottom: 1.6rem; }
 
@@ -380,14 +384,32 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* ============================================================
    QUESTIONS
    ============================================================ */
-.question-list { max-width: var(--col); padding-left: 1.6em; margin-bottom: 1.6rem; }
-.question-list li { margin-bottom: 0.85em; text-align: justify; hyphens: auto; }
-.question-list li::marker {
+/* Custom counter instead of a native ::marker — gives predictable
+   control over exactly how far left the number sits and how much
+   gap separates it from the text, which outside-position markers
+   don't reliably offer across browsers. */
+.question-list {
+  max-width: var(--col);
+  margin-bottom: 1.6rem;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: question;
+}
+.question-list li {
+  counter-increment: question;
+  display: flex;
+  margin-bottom: 0.85em;
+}
+.question-list li::before {
+  content: counter(question) ".";
+  flex: 0 0 2.3em;
+  text-align: left;
   color: var(--green);
   font-weight: 700;
-  font-size: 1.35em;
+  font-size: 1.3em;
   font-variant-numeric: oldstyle-nums;
 }
+.question-list .q-text { flex: 1 1 auto; min-width: 0; text-align: justify; hyphens: auto; }
 .closing-note { max-width: var(--col); font-style: italic; color: var(--ink-soft); }
 
 /* ============================================================
@@ -431,6 +453,17 @@ footer.site-footer {
   padding: 1.4rem 0 3.4rem;
   font-size: 0.78rem;
   color: var(--ink-soft);
+}
+footer.site-footer .footer-links { margin-top: 0.4rem; }
+footer.site-footer .footer-links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+footer.site-footer .footer-links a:hover,
+footer.site-footer .footer-links a:focus-visible {
+  color: var(--green);
+  border-bottom-color: var(--green);
 }
 
 /* ============================================================

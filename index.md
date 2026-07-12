@@ -7,7 +7,6 @@ permalink: /
 <div class="leaf">
 
   <div class="masthead">
-    <p class="kicker sc">a common-place page</p>
     <h1 class="site-title">Jackson Waschura</h1>
     <p class="site-tagline">machine learning, mountain trails, and the books between</p>
   </div>
