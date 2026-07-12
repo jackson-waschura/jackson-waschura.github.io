@@ -32,3 +32,7 @@ end
 # Performance-booster for watching directories on Windows
 gem "wdm", "~> 0.1.0", :install_if => Gem.win_platform?
 
+# Needed for `jekyll serve` locally on Ruby 3.0+ (dropped from stdlib).
+# Not required for the actual GitHub Pages build, only local dev.
+gem "webrick"
+
