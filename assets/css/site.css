@@ -1,0 +1,374 @@
+/* ============================================================
+   FONTS — self-hosted (see assets/fonts/). EB Garamond for text,
+   Cinzel Decorative reserved for drop caps only.
+   ============================================================ */
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/eb-garamond-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/eb-garamond-400-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/eb-garamond-600-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/eb-garamond-600-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cinzel Decorative';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/cinzel-decorative-700-normal.woff2') format('woff2');
+}
+
+/* ============================================================
+   PALETTE — carried over verbatim from the approved mockups.
+   Body text ~13-14:1, green/gold accents 5-7:1 on paper. Bright
+   gold is reserved for dark grounds (map, code) — never on paper.
+   ============================================================ */
+:root {
+  --paper:        #F2E6C9;
+  --paper-tint:   #E7D6A8;
+  --ink:          #241A10;
+  --ink-soft:     #4A3826;
+  --green:        #33523D;
+  --green-deep:   #1F3122;
+  --gold:         #8C5209;
+  --gold-bright:  #F9AE45;
+  --rule:         rgba(36,26,16,0.22);
+  --trail-color:  #F9AE45;
+  --col:          34rem;
+  --margin-w:     11rem;
+  --margin-gap:   1.75rem;
+  --ornament-font: 'Cinzel Decorative', Georgia, serif;
+}
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'EB Garamond', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-size: 1.155rem;
+  line-height: 1.7;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3, p, ul, ol, dl, figure { margin: 0; }
+::selection { background: var(--green); color: var(--paper); }
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+.sc { font-variant-caps: small-caps; letter-spacing: 0.045em; }
+
+/* ============================================================
+   STICKY NAV — a running header made persistent. Real book pages
+   already carry a running head naming the book/chapter; pinning
+   it is the one deliberate practical exception to "just a page."
+   ============================================================ */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.85rem 1.4rem;
+}
+.site-nav .site-nav-inner {
+  max-width: 50rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+}
+.site-nav .brand {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 1rem;
+}
+.site-nav nav {
+  font-size: 0.9rem;
+}
+.site-nav nav a {
+  text-decoration: none;
+  margin-left: 1.15rem;
+  padding-bottom: 1px;
+  border-bottom: 1px solid transparent;
+}
+.site-nav nav a:first-child { margin-left: 0; }
+.site-nav nav a:hover, .site-nav nav a:focus-visible {
+  color: var(--green);
+  border-bottom-color: var(--green);
+}
+.site-nav nav a[aria-current="page"] {
+  color: var(--green);
+  border-bottom-color: var(--green);
+}
+
+/* ============================================================
+   PAGE SCAFFOLD
+   ============================================================ */
+.leaf {
+  position: relative;
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 3.2rem 1.4rem 3.6rem;
+}
+
+.chapter-title {
+  font-weight: 600;
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+.dek {
+  text-align: center;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  margin-bottom: 2.6rem;
+}
+
+.prose { max-width: var(--col); }
+.prose p {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  margin-bottom: 1.15em;
+  text-wrap: pretty;
+}
+.prose p:last-child { margin-bottom: 0; }
+
+/* ============================================================
+   MASTHEAD — homepage only
+   ============================================================ */
+.masthead { text-align: center; padding-bottom: 1.2rem; }
+.masthead .kicker { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 0.7rem; }
+.masthead .site-title { font-size: 2.55rem; font-weight: 600; letter-spacing: 0.01em; margin-bottom: 0.55rem; }
+.masthead .site-tagline { font-style: italic; color: var(--ink-soft); font-size: 1.02rem; margin-bottom: 1.6rem; }
+
+/* ============================================================
+   DROP CAP — Cinzel Decorative, engraved gold, no background box.
+   Applied via ::first-letter on any .dropcap-host's first
+   paragraph, so it works automatically on markdown-authored
+   content (posts, future drafts) with no hand-added markup.
+   ============================================================ */
+.dropcap-host p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--ornament-font);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 3.5rem;
+  line-height: 0.78;
+  color: var(--gold);
+  padding: 0.08em 0.12em 0 0.02em;
+  margin: 0.02em 0.14em 0 0;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.4),
+    0 -1px 0 rgba(36,26,16,0.2);
+}
+
+/* ============================================================
+   MARGIN NOTE — baseline: short rule + italic ink, outer margin
+   ============================================================ */
+.margin-note {
+  float: right;
+  width: var(--margin-w);
+  margin: 0.2rem calc(-1 * (var(--margin-w) + var(--margin-gap))) 1.1rem 1.6rem;
+  clear: right;
+}
+.margin-note .rule { width: 1.6rem; height: 2px; background: var(--green); margin-bottom: 0.5rem; }
+.margin-note.quote { font-style: italic; font-size: 1.02rem; line-height: 1.42; color: var(--ink); }
+.margin-note.gloss { font-style: italic; font-size: 0.88rem; line-height: 1.5; color: var(--green); }
+.margin-note .attrib { display: block; margin-top: 0.45rem; font-style: normal; font-size: 0.72rem; color: var(--ink-soft); }
+
+@media (max-width: 880px) {
+  .margin-note {
+    float: none;
+    width: auto;
+    max-width: var(--col);
+    margin: 1rem 0 1.3rem 1.1rem;
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--green);
+    clear: both;
+  }
+  .margin-note.quote { border-left-color: var(--gold); }
+}
+
+/* ============================================================
+   FLEURON — printer's ornament at section breaks
+   ============================================================ */
+.fleuron { display: flex; justify-content: center; margin: 2.8rem 0; color: var(--green); }
+.fleuron svg { width: 84px; height: 20px; }
+
+/* ============================================================
+   READING — book index
+   ============================================================ */
+.book-index { list-style: none; padding: 0; max-width: var(--col); }
+.book-index .shelf-heading {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin: 2.2rem 0 1rem;
+  letter-spacing: 0.04em;
+}
+.book-index .shelf-heading:first-child { margin-top: 0; }
+.book-entry { padding-bottom: 1.7rem; margin-bottom: 1.7rem; border-bottom: 1px solid var(--rule); }
+.book-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.book-heading { font-size: 1.18rem; margin-bottom: 0.3rem; }
+.book-title { font-style: italic; font-weight: 600; }
+.book-author { font-style: normal; color: var(--ink-soft); font-size: 0.98rem; margin-left: 0.4em; }
+.book-author::before { content: "— "; }
+.book-desc { text-align: justify; hyphens: auto; color: var(--ink); }
+
+.mark { display: inline-flex; align-items: center; gap: 0.4rem; font-style: italic; font-size: 0.85rem; }
+.mark--read { color: var(--green); }
+.mark--read svg { width: 15px; height: 13px; }
+.mark--unread { color: var(--gold); }
+
+/* ============================================================
+   HIKING — field notes below the (retinted) map
+   ============================================================ */
+#map {
+  height: 560px;
+  width: 100%;
+  border-radius: 3px;
+}
+/* Retint tiles only — polylines/popups drawn in a separate Leaflet
+   pane and must stay unfiltered, or trail colors/popup ink shift too. */
+.leaflet-tile-pane img {
+  filter: sepia(0.35) saturate(1.6) hue-rotate(-8deg) brightness(0.92) contrast(1.05);
+}
+.hike-list { max-width: var(--col); margin: 0 auto; padding: 0 1.4rem; }
+.field-note {
+  max-width: var(--col);
+  background: var(--paper-tint);
+  padding: 2rem 2rem;
+  margin-bottom: 1.6rem;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+}
+.field-note:last-child { margin-bottom: 0; }
+.trail-name { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.15rem; cursor: pointer; }
+.trail-name:hover { color: var(--green); }
+.trail-stats { font-size: 0.95rem; color: var(--green); margin-bottom: 0.7rem; }
+.trail-stats .sep { color: var(--ink-soft); margin: 0 0.35em; }
+.trail-note { font-style: italic; color: var(--ink); max-width: 30rem; }
+
+/* #map prefix bumps specificity above leaflet.css's own same-class
+   rules — leaflet.css loads after site.css in the page and would
+   otherwise win the cascade tie and stay white. */
+#map .leaflet-popup-content-wrapper {
+  background: var(--paper-tint);
+  color: var(--ink);
+  border-radius: 3px;
+  font-family: 'EB Garamond', Georgia, serif;
+}
+#map .leaflet-popup-tip { background: var(--paper-tint); }
+#map .trail-popup h3 { font-size: 1.1rem; font-weight: 600; margin: 0 0 0.4rem; color: var(--ink); }
+#map .trail-popup .trail-info { font-size: 0.92rem; margin-bottom: 0.2rem; }
+#map .leaflet-popup-close-button { color: var(--ink-soft); }
+
+/* ============================================================
+   QUESTIONS
+   ============================================================ */
+.question-list { max-width: var(--col); padding-left: 1.35em; margin-bottom: 1.6rem; }
+.question-list li { margin-bottom: 0.85em; text-align: justify; hyphens: auto; }
+.question-list li::marker { color: var(--green); font-style: italic; }
+.closing-note { max-width: var(--col); font-style: italic; color: var(--ink-soft); }
+
+/* ============================================================
+   WRITING (post list on the homepage)
+   ============================================================ */
+.post-index { list-style: none; padding: 0; max-width: var(--col); }
+.post-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8em;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.post-row:last-child { border-bottom: none; }
+.post-row .post-title { font-style: italic; font-weight: 600; flex: 1 1 auto; }
+.post-row:hover .post-title { color: var(--green); }
+.post-row .post-date { font-size: 0.85rem; color: var(--ink-soft); flex: 0 0 auto; }
+.empty-note { font-style: italic; color: var(--ink-soft); }
+
+/* ============================================================
+   BLOG POST
+   ============================================================ */
+.post-byline { text-align: center; font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 2rem; }
+.post-body cite { font-style: italic; }
+.post-body .attribution {
+  text-align: right;
+  font-size: 0.92rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin-top: 1.6rem;
+  max-width: var(--col);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer.site-footer {
+  text-align: center;
+  padding: 1.4rem 0 3.4rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 640px) {
+  body { font-size: 1.06rem; }
+  .masthead .site-title { font-size: 2.05rem; }
+  .dropcap { font-size: 2.7rem; }
+  .field-note { padding: 1.6rem 1.4rem; }
+  .site-nav nav a { margin-left: 0.7rem; }
+  #map { height: 420px; }
+}
