@@ -194,6 +194,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .prose p:last-child { margin-bottom: 0; }
 
+/* Body-copy links: gold ink, set apart from the running text with a
+   thin underline lifted off the baseline rather than sitting on it. */
+.prose a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease, text-decoration-thickness 0.15s ease;
+}
+.prose a:hover, .prose a:focus-visible {
+  color: var(--green);
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 1.5px;
+}
+
 /* ============================================================
    MASTHEAD — homepage only
    ============================================================ */
