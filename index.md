@@ -8,7 +8,7 @@ permalink: /
 
   <div class="masthead">
     <h1 class="site-title">Jackson Waschura</h1>
-    <p class="site-tagline">machine learning, mountain trails, and the books between</p>
+    <p class="site-tagline">neural networks, forest trails, and lifelong learning</p>
   </div>
 
   <div class="prose dropcap-host">
