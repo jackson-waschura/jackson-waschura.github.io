@@ -12,11 +12,11 @@ permalink: /
   </div>
 
   <div class="prose dropcap-host">
-    <p>Hi! My name is Jackson. I&rsquo;m fascinated by machine learning and have spent the last four years building, training, and deploying neural networks at <a href="https://zoox.com/">Zoox</a> to enable autonomous driving. I&rsquo;m always searching to learn more about this alchemical art and find new ways to put it to use.</p>
+    <p>Hi! My name is Jackson. I&rsquo;m fascinated by machine learning and currently working at <a href="https://www.mindrobotics.com/">Mind Robotics</a> training robots to automate dextrous manufacturing tasks. Previously I spent four years building, training, and deploying neural networks at <a href="https://zoox.com/">Zoox</a> to enable autonomous driving. I&rsquo;m always searching to learn more about this alchemical art and find new ways to put it to use.</p>
 
-    <p>In my free time I like to play board games, make cocktails, <a href="/hiking/">hike trails</a>, make art, and try new food.</p>
+    <p>In my free time I like to play board games, make cocktails, <a href="/hike/">hike trails</a>, create art, build video games, and try new food.</p>
 
-    <p>I&rsquo;m currently looking to meet new people in the SF Bay Area passionate about machine learning and life-long learning. If you think we&rsquo;d have a stimulating conversation, or if you have recommendations for any of the hobbies I listed above, please reach out!</p>
+    <p>I&rsquo;m always looking to meet new people in the SF Bay Area passionate about machine learning and life-long learning. If you think we&rsquo;d have a stimulating conversation, or if you have recommendations for any of the hobbies I listed above, please reach out!</p>
   </div>
 
   {%- include fleuron.html -%}
