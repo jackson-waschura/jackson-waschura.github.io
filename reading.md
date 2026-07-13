@@ -4,49 +4,101 @@ title: Reading
 permalink: /reading/
 ---
 
-What have I been reading? Below is a reverse chronological list of books I've read since the start of 2024.
+<div class="leaf">
+  {%- include page-header.html title="Reading" dek="what&rsquo;s been read, and what&rsquo;s still on the shelf" -%}
 
-<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/shared-styles.css">
+  <div class="prose dropcap-host" id="reading-intro">
+    <p>Titles drift on and off this shelf as I make my way through them. A small green tick in the margin marks the ones I&rsquo;ve finished; a note in gold marks the ones still waiting.</p>
+  </div>
 
-<div id="reading-list">
-  <div class="loading-indicator">Loading books...</div>
+  <ol class="book-index" id="book-index" aria-label="Books"></ol>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const readingList = document.getElementById('reading-list');
-  
-  // Load books data from JSON file
+document.addEventListener('DOMContentLoaded', function () {
   fetch('{{ site.baseurl }}/data/books.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok: ' + response.statusText);
-      }
+    .then(function (response) {
+      if (!response.ok) throw new Error('Network response was not ok: ' + response.statusText);
       return response.json();
     })
-    .then(data => {
-      // Remove loading indicator
-      readingList.innerHTML = '';
-      
-      // Add each book to the page
-      data.books.forEach(book => {
-        const bookCard = document.createElement('div');
-        bookCard.className = 'book-card';
-        
-        bookCard.innerHTML = `
-          <div class="book-header">
-            <div class="book-title">${book.title}</div>
-            <div class="book-author">by ${book.author}</div>
-          </div>
-          <div class="book-description">${book.description}</div>
-        `;
-        
-        readingList.appendChild(bookCard);
-      });
+    .then(function (data) {
+      var books = data.books || [];
+      var read = books.filter(function (b) { return b.status !== 'on-the-shelf'; });
+      var shelf = books.filter(function (b) { return b.status === 'on-the-shelf'; });
+      var list = document.getElementById('book-index');
+      var showHeadings = read.length > 0 && shelf.length > 0;
+
+      function renderEntry(book, isRead) {
+        var li = document.createElement('li');
+        li.className = 'book-entry';
+
+        var heading = document.createElement('p');
+        heading.className = 'book-heading';
+        var title = document.createElement('span');
+        title.className = 'book-title';
+        title.textContent = book.title;
+        var author = document.createElement('span');
+        author.className = 'book-author';
+        author.textContent = book.author;
+        heading.appendChild(title);
+        heading.appendChild(author);
+
+        var desc = document.createElement('p');
+        desc.className = 'book-desc';
+        desc.textContent = book.description;
+
+        var aside = document.createElement('aside');
+        aside.className = 'margin-note';
+        var rule = document.createElement('span');
+        rule.className = 'rule';
+        rule.setAttribute('aria-hidden', 'true');
+        aside.appendChild(rule);
+
+        var mark = document.createElement('span');
+        if (isRead) {
+          mark.className = 'mark mark--read';
+          mark.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2,9.2 C4,10.9 5.6,12.6 7,14.3 C10,10.2 12.8,6 15,2.4"/></svg><span>finished</span>';
+          aside.appendChild(mark);
+          var vh = document.createElement('span');
+          vh.className = 'visually-hidden';
+          vh.textContent = 'Read.';
+          aside.appendChild(vh);
+        } else {
+          mark.className = 'mark mark--unread';
+          mark.textContent = 'on the shelf';
+          aside.appendChild(mark);
+          var vh2 = document.createElement('span');
+          vh2.className = 'visually-hidden';
+          vh2.textContent = 'On the shelf, unread.';
+          aside.appendChild(vh2);
+        }
+
+        li.appendChild(heading);
+        li.appendChild(desc);
+        li.appendChild(aside);
+        return li;
+      }
+
+      if (showHeadings) {
+        var readHeading = document.createElement('p');
+        readHeading.className = 'shelf-heading sc';
+        readHeading.textContent = 'Read';
+        list.appendChild(readHeading);
+      }
+      read.forEach(function (book) { list.appendChild(renderEntry(book, true)); });
+
+      if (showHeadings) {
+        var shelfHeading = document.createElement('p');
+        shelfHeading.className = 'shelf-heading sc';
+        shelfHeading.textContent = 'On the Shelf';
+        list.appendChild(shelfHeading);
+      }
+      shelf.forEach(function (book) { list.appendChild(renderEntry(book, false)); });
     })
-    .catch(error => {
+    .catch(function (error) {
       console.error('Error loading books:', error);
-      readingList.innerHTML = '<div class="error-message">Error loading books. Please try again later.</div>';
+      var list = document.getElementById('book-index');
+      list.innerHTML = '<li class="empty-note">Could not load the reading list. Please try again later.</li>';
     });
 });
 </script>

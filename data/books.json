@@ -3,67 +3,80 @@
     {
         "title": "Project Hail Mary",
         "author": "Andy Weir",
-        "description": "An optimistic hard sci-fi novel about a lone astronaut, packed with displays of compentence from all characters"
+        "description": "An optimistic hard sci-fi novel about a lone astronaut, packed with displays of compentence from all characters",
+        "status": "read"
     },
     {
         "title": "Waking Up",
         "author": "Sam Harris",
-        "description": "A bit of a meandering exploration of the nature of consciousness and spiritual experience."
+        "description": "A bit of a meandering exploration of the nature of consciousness and spiritual experience.",
+        "status": "read"
     },
     {
         "title": "The Overstory",
         "author": "Richard Powers",
-        "description": "A novel which weaves the personal stories of several unique characters to tell the story of the fight to save the world's trees."
+        "description": "A novel which weaves the personal stories of several unique characters to tell the story of the fight to save the world's trees.",
+        "status": "read"
     },
     {
         "title": "To Say Nothing of the Dog",
         "author": "Connie Willis",
-        "description": "A time traveling romp with mystery, romance, and a hefty dose of irreverence."
+        "description": "A time traveling romp with mystery, romance, and a hefty dose of irreverence.",
+        "status": "read"
     },
     {
       "title": "Bloodchild and Other Stories",
       "author": "Octavia E. Butler",
-      "description": "A collection of short stories by Octavia E. Butler, also including two essays."
+      "description": "A collection of short stories by Octavia E. Butler, also including two essays.",
+      "status": "read"
     },
     {
       "title": "Get Better at Anything",
       "author": "Scott Young",
-      "description": "A second take on how learning works, this time with a focus on practical advice and general principles for getting better at anything."
+      "description": "A second take on how learning works, this time with a focus on practical advice and general principles for getting better at anything.",
+      "status": "read"
     },
     {
       "title": "The Tyranny of Merit",
       "author": "Michael Sandel",
-      "description": "A critique of the focus on meritocracy in modern society claiming that even if we achieve perfect meritocracy, it will not lead to a more just or happy society."
+      "description": "A critique of the focus on meritocracy in modern society claiming that even if we achieve perfect meritocracy, it will not lead to a more just or happy society.",
+      "status": "read"
     },
     {
       "title": "Death Comes to Pemberley",
       "author": "PD James",
-      "description": "A murder mystery set in the world of Jane Austen's Pride and Prejudice."
+      "description": "A murder mystery set in the world of Jane Austen's Pride and Prejudice.",
+      "status": "read"
     },
     {
       "title": "Ultralearning",
       "author": "Scott Young",
-      "description": "Scott Young's synthesis of the most effective principles of accelerated learning focusing on people achieving rapid improvement through specific projects."
+      "description": "Scott Young's synthesis of the most effective principles of accelerated learning focusing on people achieving rapid improvement through specific projects.",
+      "status": "read"
     },
     {
       "title": "A Brief History of Intelligence",
       "author": "Max S. Bennett",
-      "description": "A history of the evoluntionary path that led to present day intelligence."
+      "description": "A history of the evoluntionary path that led to present day intelligence.",
+      "status": "read"
     },
     {
       "title": "Legends and Lattes",
       "author": "Travis Baldree",
-      "description": "A fun and low-stakes fantasy novel about a retired mercenary setting up a coffee shop and making friends along the way."
+      "description": "A fun and low-stakes fantasy novel about a retired mercenary setting up a coffee shop and making friends along the way.",
+      "status": "read"
     },
     {
       "title": "I, Robot",
       "author": "Isaac Asimov",
-      "description": "A collection of short stories about robots and their interactions with humanity connected by the theme of misalignment."
+      "description": "A collection of short stories about robots and their interactions with humanity connected by the theme of misalignment.",
+      "status": "read"
     },
     {
       "title": "The Vital Question",
       "author": "Nick Lane",
-      "description": "An investigation into the origin of life, abiogenesis, and the development of multicellular life following the adoption of the mitochondria."
+      "description": "An investigation into the origin of life, abiogenesis, and the development of multicellular life following the adoption of the mitochondria.",
+      "status": "read"
     }
   ]
 } 

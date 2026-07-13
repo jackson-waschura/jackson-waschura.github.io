@@ -4,56 +4,51 @@ title: Hiking
 permalink: /hiking/
 ---
 
-<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/shared-styles.css">
+<div class="hiking-head">
+  {%- include page-header.html title="Hiking" dek="a field log of trails traced by hand" -%}
+</div>
 
-<div id="map" style="height: 600px; width: 100%;"></div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <style>
-.trail-popup h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-.trail-info {
-  margin-bottom: 5px;
-}
-.loading-indicator {
+.map-loading {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--paper-tint);
+  color: var(--ink);
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 3px;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-/* Style for terrain tiles to make trails stand out */
-.leaflet-tile-pane img {
-  filter: brightness(0.5) contrast(1.3) sepia(0.35) saturate(2.5) hue-rotate(90deg);
 }
 </style>
 
+<div class="hiking-layout">
+  <div id="map"></div>
+  <div class="hike-list">
+    <p class="list-hint">click a trail to find it on the map</p>
+    <div id="hike-list-entries"></div>
+  </div>
+</div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize the map centered on the SF Bay Area
   const map = L.map('map').setView([37.7013197, -122.217696], 9);
-  
-  // Add ESRI Terrain tile layer (focused on terrain and elevation)
-  const terrainLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
-    maxZoom: 13
+
+  const topoLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, NPS',
+    maxZoom: 18
   }).addTo(map);
-  
-  // Create a loading indicator
+
   const loadingIndicator = document.createElement('div');
-  loadingIndicator.className = 'loading-indicator';
+  loadingIndicator.className = 'map-loading';
   loadingIndicator.textContent = 'Loading hiking trails...';
   document.getElementById('map').appendChild(loadingIndicator);
-  
-  // Load hiking data from JSON file
+
+  const entriesEl = document.getElementById('hike-list-entries');
+
   fetch('{{ site.baseurl }}/data/hikes.json')
     .then(response => {
       if (!response.ok) {
@@ -62,25 +57,19 @@ document.addEventListener('DOMContentLoaded', function() {
       return response.json();
     })
     .then(hikingTrails => {
-      // Remove loading indicator
       loadingIndicator.remove();
-      
-      // Get the trail color from CSS variables
+
       const trailColor = getComputedStyle(document.documentElement).getPropertyValue('--trail-color').trim();
-      
-      // Add the hiking trails to the map
+
       hikingTrails.forEach(trail => {
-        // Convert path to Leaflet LatLng objects
         const path = trail.path.map(point => L.latLng(point[0], point[1]));
-        
-        // Create a polyline for the trail
+
         const polyline = L.polyline(path, {
           color: trailColor,
           weight: 4,
           opacity: 1.0
         }).addTo(map);
-        
-        // Create popup content
+
         const popupContent = `
           <div class="trail-popup">
             <h3>${trail.name}</h3>
@@ -90,32 +79,44 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="trail-info"><strong>Notes:</strong> ${trail.notes}</div>
           </div>
         `;
-        
-        // Bind popup to the polyline
         polyline.bindPopup(popupContent);
-        
-        // Add hover effect
-        polyline.on('mouseover', function() {
-          this.setStyle({
-            weight: 8
-          });
+
+        polyline.on('mouseover', function() { this.setStyle({ weight: 8 }); });
+        polyline.on('mouseout', function() { this.setStyle({ weight: 4 }); });
+
+        const noteEl = document.createElement('div');
+        noteEl.className = 'field-note';
+
+        const nameEl = document.createElement('h3');
+        nameEl.className = 'trail-name';
+        nameEl.textContent = trail.name;
+        nameEl.tabIndex = 0;
+        nameEl.setAttribute('role', 'button');
+        nameEl.addEventListener('click', () => {
+          map.fitBounds(polyline.getBounds(), { padding: [24, 24] });
+          polyline.openPopup(polyline.getBounds().getCenter());
         });
-        
-        polyline.on('mouseout', function() {
-          this.setStyle({
-            weight: 4
-          });
+        nameEl.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nameEl.click(); }
         });
+
+        const statsEl = document.createElement('p');
+        statsEl.className = 'trail-stats';
+        statsEl.innerHTML = `${trail.distance}<span class="sep">&middot;</span>${trail.elevation} gain<span class="sep">&middot;</span>${trail.difficulty}`;
+
+        const noteText = document.createElement('p');
+        noteText.className = 'trail-note';
+        noteText.textContent = trail.notes;
+
+        noteEl.appendChild(nameEl);
+        noteEl.appendChild(statsEl);
+        noteEl.appendChild(noteText);
+        entriesEl.appendChild(noteEl);
       });
     })
     .catch(error => {
       console.error('Error loading hiking trails:', error);
       loadingIndicator.textContent = 'Error loading hiking trails. Please try again later.';
-      loadingIndicator.style.backgroundColor = 'rgba(255, 100, 100, 0.8)';
     });
 });
 </script>
-
-This page displays a collection of trails I've hiked throughout the San Francisco Bay Area. Click on a trail on the map to see details.
-
-In the future, I plan to expand this map with more hikes and photos! Stay tuned!

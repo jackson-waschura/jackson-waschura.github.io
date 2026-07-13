@@ -1,24 +1,15 @@
 ---
 layout: default
+title: Page Not Found
+permalink: /404.html
 ---
 
-<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+<div class="leaf" style="text-align: center;">
+  {%- include page-header.html title="A Missing Leaf" dek="this page isn&rsquo;t bound into the book" -%}
 
-<div class="container">
-  <h1>404</h1>
+  <div class="prose" style="margin: 0 auto;">
+    <p style="text-align: center;">Whatever you were looking for isn&rsquo;t here &mdash; perhaps a page torn loose, or a shelf that was never filled. Try the <a href="{{ '/' | relative_url }}">front page</a> instead.</p>
+  </div>
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
+  {%- include fleuron.html -%}
 </div>

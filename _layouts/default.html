@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title | escape }} &middot; {% endif %}{{ site.title | escape }}</title>
+  <meta name="description" content="{{ page.description | default: site.description | strip_html | strip_newlines | truncate: 160 | escape }}">
+  <link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <!-- Preload the two weights used above the fold (nav + body text) so
+       the real face is ready before first paint on every navigation,
+       instead of a visible swap from the fallback serif. -->
+  <link rel="preload" href="{{ '/assets/fonts/eb-garamond-400-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/eb-garamond-600-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  {%- feed_meta -%}
+</head>
+<body>
+{%- include header.html -%}
+<main>
+{{ content }}
+</main>
+{%- include footer.html -%}
+</body>
+</html>

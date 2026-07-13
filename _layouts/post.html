@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<div class="leaf">
+  <h1 class="chapter-title sc">{{ page.title | escape }}</h1>
+  <p class="post-byline">{{ page.date | date: "%B %-d, %Y" }}</p>
+
+  <div class="prose post-body dropcap-host">
+    {{ content }}
+  </div>
+
+  {%- include fleuron.html -%}
+</div>

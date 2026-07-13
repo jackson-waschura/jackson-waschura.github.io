@@ -1,0 +1,8 @@
+<header class="site-nav">
+  <div class="site-nav-inner sc">
+    <a class="brand" href="{{ '/' | relative_url }}">Jackson Waschura</a>
+    <nav aria-label="Primary">
+      <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a><a href="{{ '/hiking/' | relative_url }}"{% if page.url == '/hiking/' %} aria-current="page"{% endif %}>Hiking</a><a href="{{ '/reading/' | relative_url }}"{% if page.url == '/reading/' %} aria-current="page"{% endif %}>Reading</a><a href="{{ '/questions/' | relative_url }}"{% if page.url == '/questions/' %} aria-current="page"{% endif %}>Questions</a>
+    </nav>
+  </div>
+</header>
